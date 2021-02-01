@@ -24,10 +24,10 @@ steps:
   condition: succeededOrFailed()
 
 - task: AzureRmWebAppDeployment@4
-  displayName: 'Deploy Azure App Service'
   inputs:
-    azureSubscription: 'b184036a-5180-4167-a04d-fbe745b0fe61'
-    appType: 'webApp'
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial (b184036a-5180-4167-a04d-fbe745b0fe61)'
+    appType: 'webAppLinux'
     WebAppName: 'javaspringboot-app'
     packageForLinux: '$(System.DefaultWorkingDirectory)/_CICD Yaml-Maven-CI/drop/app/target/gs-spring-boot-0.1.0.jar'
-    StartupCommand: '$(Parameters.StartupCommand)'
+    RuntimeStack: 'JAVA|11-java11'
