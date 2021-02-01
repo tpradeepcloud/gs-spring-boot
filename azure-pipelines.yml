@@ -8,6 +8,7 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'app/pom.xml'
@@ -19,22 +20,24 @@ pool:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-    - task: CopyFiles@2
-      inputs:
-        SourceFolder: '$(system.defaultworkingdirectory)'
-        Contents: '**/*.jar'
-        TargetFolder: '$(build.artifactstagingdirectory)'
-        CleanTargetFolder: true
-        - task: PublishBuildArtifacts@1
-          inputs:
-            PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-            ArtifactName: 'drop'
-            publishLocation: 'Container'
-            - task: AzureRmWebAppDeployment@4
-              inputs:
-                ConnectionType: 'AzureRM'
-                azureSubscription: 'Free Trial (b184036a-5180-4167-a04d-fbe745b0fe61)'
-                appType: 'webAppLinux'
-                WebAppName: 'javaspringboot-app'
-                packageForLinux: '$(System.DefaultWorkingDirectory)/_CICD Yaml-Maven-CI/drop/app/target/gs-spring-boot-0.1.0.jar'
-                RuntimeStack: 'JAVA|8-jre8'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.jar'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Free Trial (b184036a-5180-4167-a04d-fbe745b0fe61)'
+    appType: 'webAppLinux'
+    WebAppName: 'javaspringboot-app'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.jar'
+    RuntimeStack: 'JAVA|8-jre8'
