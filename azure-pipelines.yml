@@ -70,3 +70,12 @@ stages:
               appType: webAppLinux
               appName: $(webAppName)
               package: '$(System.ArtifactsDirectory)/drop/**/target/*.?(war|jar)'
+              steps:'Dev'
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy Azure App Service'
+  inputs:
+    azureSubscription: '$(Parameters.ConnectedServiceName)'
+    appType: '$(Parameters.WebAppKind)'
+    WebAppName: '$(Parameters.WebAppName)'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/_CICD Yaml-Maven-CI/drop/app/target/gs-spring-boot-0.1.0.jar'
+    StartupCommand: '$(Parameters.StartupCommand)'
