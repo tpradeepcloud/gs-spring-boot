@@ -8,7 +8,6 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
-
 - task: Maven@3
   inputs:
     mavenPomFile: 'app/pom.xml'
@@ -20,7 +19,6 @@ pool:
     mavenAuthenticateFeed: false
     effectivePomSkip: false
     sonarQubeRunAnalysis: false
-
 - task: CopyFiles@2
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
