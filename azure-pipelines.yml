@@ -38,4 +38,4 @@ steps:
     azureSubscription: 'Free Trial (b184036a-5180-4167-a04d-fbe745b0fe61)'
     appType: 'webAppLinux'
     WebAppName: 'javaspringboot-app'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*/drop/app/target/gs-spring-boot-0.1.0.jar'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/*/drop/app/target/gs-spring-boot-0.1.0.jar'
