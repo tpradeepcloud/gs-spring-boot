@@ -5,8 +5,6 @@
 
 trigger:
 - main
-jobs:
-- job: build
 pool:
   vmImage: 'Ubuntu-16.04'
 steps:
@@ -38,10 +36,6 @@ steps:
     downloadType: 'single'
     artifactName: 'drop'
     downloadPath: '$(System.ArtifactsDirectory)'
-
-- job: deploy
-  dependsOn: build
-  condition: succeeded()
 
 - task: AzureRmWebAppDeployment@4
   inputs:
