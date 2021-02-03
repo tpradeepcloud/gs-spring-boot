@@ -5,6 +5,8 @@
 
 trigger:
 - main
+stages:
+- stage: CI
 
 pool:
   vmImage: 'Ubuntu-16.04'
@@ -38,6 +40,11 @@ steps:
     downloadType: 'single'
     artifactName: 'drop'
     downloadPath: '$(System.ArtifactsDirectory)'
+
+– stage: dev_deploy
+pool:
+  vmImage: 'Ubuntu-16.04'
+
 - task: AzureRmWebAppDeployment@4
   inputs:
     ConnectionType: 'AzureRM'
